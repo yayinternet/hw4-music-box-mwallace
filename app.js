@@ -4,7 +4,7 @@
 // See HW4 writeup for more hints and details.
 class App {
   constructor() {
-    const menu = new MenuScreen(this.onSongSelected, this.onThemeSelected);
+    const menu = new MenuScreen();
     const form = document.querySelector('form');
     form.addEventListener('submit', this.onSubmit);
   }

@@ -3,12 +3,11 @@
 //
 // See HW4 writeup for more hints and details.
 class MenuScreen {
-  constructor(onSongSelectedCallback) {
+  constructor() {
     // Bindings
     this.onResolved = this.onResolved.bind(this);
     // Members
     this.songs = {};
-    this.onSongSelectedCallback = onSongSelectedCallback;
     this.themes = ['candy', 'charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
     // Hardcode this playlist for now (it would be nice if we could let the 
     // user add their own playlist later).
