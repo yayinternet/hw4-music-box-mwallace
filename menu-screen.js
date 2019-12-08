@@ -4,7 +4,56 @@
 // See HW4 writeup for more hints and details.
 class MenuScreen {
   constructor() {
-    // TODO(you): Implement the constructor and add fields as necessary.
+    // Bindings
+    this.onResolved = this.onResolved.bind(this);
+    this.onSongSelected = this.onSongSelected.bind(this);
+    // Members
+    this.songs = {};
+    // Listen to select menu changed events
+    document.querySelector('#song-selector').addEventListener('change', this.onSongSelected);
+    // Hardcode this playlist for now (it would be nice if we could let the 
+    // user add their own playlist later).
+    this.playlist = 'https://yayinternet.github.io/hw4-music/songs.json';
+    // Open the playlist
+    this.getPlaylist(this.playlist);
+
   }
-  // TODO(you): Add methods as necessary.
+
+  onSuccess(response) {
+    return response.json();
+  }
+
+  onFailure(error) {
+    console.log(error);
+  }
+
+  onResolved(resource) {
+    this.songs = resource;
+    this.populateMenu(resource);
+  }
+
+  getPlaylist(playlist) {
+    fetch(playlist)
+      .then(this.onSuccess, this.onFailure)
+      .then(this.onResolved);
+  }
+
+  populateMenu(songs) {
+    const songSelector = document.querySelector('#song-selector');
+    for (const [songName, songObject] of Object.entries(songs)) {
+      const element = document.createElement('option');
+      element.value = songName;
+      element.innerHTML = songObject.title;
+      songSelector.appendChild(element);
+    }
+  }
+
+  onSongSelected(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(event.currentTarget.value);
+    console.log(this.songs[event.currentTarget.value]);
+    return;
+  }
+
 }

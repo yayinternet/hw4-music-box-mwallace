@@ -4,7 +4,7 @@
 // See HW4 writeup for more hints and details.
 class App {
   constructor() {
-    // TODO(you): Implement the constructor and add fields as necessary.
+    const menu = new MenuScreen();
   }
   // TODO(you): Add methods as necessary.
 }
