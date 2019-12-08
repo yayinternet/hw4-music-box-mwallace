@@ -15,6 +15,8 @@ class App {
 
   onSubmit(event) {
     event.preventDefault();
+    const songInput = document.querySelector('#song-selector');
+    console.log(songInput.value);
     const textInput = document.querySelector('#query-input');
     console.log(textInput.value);
   }

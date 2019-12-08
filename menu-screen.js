@@ -6,13 +6,10 @@ class MenuScreen {
   constructor(onSongSelectedCallback) {
     // Bindings
     this.onResolved = this.onResolved.bind(this);
-    this.onSongSelected = this.onSongSelected.bind(this);
     // Members
     this.songs = {};
     this.onSongSelectedCallback = onSongSelectedCallback;
     this.themes = ['candy', 'charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
-    // Listen to events
-    document.querySelector('#song-selector').addEventListener('change', this.onSongSelected);
     // Hardcode this playlist for now (it would be nice if we could let the 
     // user add their own playlist later).
     this.playlist = 'https://yayinternet.github.io/hw4-music/songs.json';
@@ -50,12 +47,6 @@ class MenuScreen {
       element.innerHTML = songObject.title;
       songSelector.appendChild(element);
     }
-  }
-
-  onSongSelected(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.onSongSelectedCallback(this.songs[event.currentTarget.value]);
   }
 
   prepopulateTheme() {
