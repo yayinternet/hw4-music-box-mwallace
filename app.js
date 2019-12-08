@@ -4,7 +4,11 @@
 // See HW4 writeup for more hints and details.
 class App {
   constructor() {
-    const menu = new MenuScreen();
+    // Bindings
+    this.onSubmit = this.onSubmit.bind(this);
+    // Members
+    this.menu = new MenuScreen();
+    // Event Listeners
     const form = document.querySelector('form');
     form.addEventListener('submit', this.onSubmit);
   }
@@ -16,7 +20,8 @@ class App {
   onSubmit(event) {
     event.preventDefault();
     const songInput = document.querySelector('#song-selector');
-    console.log(songInput.value);
+    const song = this.menu.getSongObject(songInput.value);
+    console.log(song);
     const textInput = document.querySelector('#query-input');
     console.log(textInput.value);
   }

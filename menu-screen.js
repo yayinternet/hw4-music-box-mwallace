@@ -16,7 +16,6 @@ class MenuScreen {
     this.getPlaylist(this.playlist);
     // Prepopulate theme randomly
     this.prepopulateTheme();
-
   }
 
   onSuccess(response) {
@@ -52,6 +51,10 @@ class MenuScreen {
     const index = Math.floor(Math.random() * this.themes.length);
     const themeInput = document.querySelector('#query-input');
     themeInput.defaultValue = this.themes[index];
+  }
+
+  getSongObject(songName) {
+    return this.songs[songName];
   }
 
 }
