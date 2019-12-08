@@ -5,13 +5,17 @@
 class App {
   constructor() {
     const menu = new MenuScreen(this.onSongSelected, this.onThemeSelected);
+    const form = document.querySelector('form');
+    form.addEventListener('submit', this.onSubmit);
   }
 
   onSongSelected(songObject) {
     console.log(songObject);
   }
-  
-  onThemeSelected(theme) {
-    console.log(theme);
+
+  onSubmit(event) {
+    event.preventDefault();
+    const textInput = document.querySelector('#query-input');
+    console.log(textInput.value);
   }
 }

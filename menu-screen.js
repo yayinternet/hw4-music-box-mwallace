@@ -3,16 +3,15 @@
 //
 // See HW4 writeup for more hints and details.
 class MenuScreen {
-  constructor(onSongSelectedCallback, onThemeSelectedCallback) {
+  constructor(onSongSelectedCallback) {
     // Bindings
     this.onResolved = this.onResolved.bind(this);
     this.onSongSelected = this.onSongSelected.bind(this);
     // Members
     this.songs = {};
     this.onSongSelectedCallback = onSongSelectedCallback;
-    this.onThemeSelectedCallback = onThemeSelectedCallback;
     this.themes = ['candy', 'charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
-    // Listen to select menu changed events
+    // Listen to events
     document.querySelector('#song-selector').addEventListener('change', this.onSongSelected);
     // Hardcode this playlist for now (it would be nice if we could let the 
     // user add their own playlist later).
@@ -63,8 +62,6 @@ class MenuScreen {
     const index = Math.floor(Math.random() * this.themes.length);
     const themeInput = document.querySelector('#query-input');
     themeInput.defaultValue = this.themes[index];
-    this.onThemeSelectedCallback(this.themes[index]);
   }
-
 
 }
