@@ -4,7 +4,11 @@
 // See HW4 writeup for more hints and details.
 class App {
   constructor() {
-    const menu = new MenuScreen();
+    const menu = new MenuScreen(this.onSongSelected);
+  }
+
+  onSongSelected(songObject) {
+    console.log(songObject);
   }
   // TODO(you): Add methods as necessary.
 }

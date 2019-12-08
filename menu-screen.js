@@ -3,12 +3,13 @@
 //
 // See HW4 writeup for more hints and details.
 class MenuScreen {
-  constructor() {
+  constructor(onSongSelectedCallback) {
     // Bindings
     this.onResolved = this.onResolved.bind(this);
     this.onSongSelected = this.onSongSelected.bind(this);
     // Members
     this.songs = {};
+    this.onSongSelectedCallback = onSongSelectedCallback;
     // Listen to select menu changed events
     document.querySelector('#song-selector').addEventListener('change', this.onSongSelected);
     // Hardcode this playlist for now (it would be nice if we could let the 
@@ -51,9 +52,7 @@ class MenuScreen {
   onSongSelected(event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log(event.currentTarget.value);
-    console.log(this.songs[event.currentTarget.value]);
-    return;
+    this.onSongSelectedCallback(this.songs[event.currentTarget.value]);
   }
 
 }
