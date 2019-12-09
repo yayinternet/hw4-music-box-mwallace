@@ -28,4 +28,8 @@ class MusicScreen {
   show() {
     this.container.style.display = 'flex';
   }
+
+  hide() {
+    this.container.style.display = 'none';
+  }
 }
