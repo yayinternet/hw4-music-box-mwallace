@@ -9,7 +9,23 @@
 // See HW4 writeup for more hints and details.
 class MusicScreen {
   constructor() {
-    // TODO(you): Implement the constructor and add fields as necessary.
+    this.container = document.createElement('article');
+    this.player = document.createElement('section');
+    this.player.id = 'player';
+    this.controls = document.createElement('footer');
+    this.controls.id = 'controls';
+    this.controlsButton = document.createElement('img');
+    this.controlsButton.id = 'controlsButton';
+    this.controlsButton.src = 'images/play.png';
+    this.controls.appendChild(this.controlsButton);
+    this.container.appendChild(this.player);
+    this.container.appendChild(this.controls);
+    this.container.style.display = 'none';
+    const body = document.querySelector('body');
+    body.appendChild(this.container);
   }
-  // TODO(you): Add methods as necessary.
+
+  show() {
+    this.container.style.display = 'flex';
+  }
 }

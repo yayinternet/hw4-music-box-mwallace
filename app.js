@@ -8,6 +8,7 @@ class App {
     this.onSubmit = this.onSubmit.bind(this);
     // Members
     this.menu = new MenuScreen();
+    this.music = new MusicScreen();
     // Event Listeners
     const form = document.querySelector('form');
     form.addEventListener('submit', this.onSubmit);
@@ -25,5 +26,6 @@ class App {
     const textInput = document.querySelector('#query-input');
     console.log(textInput.value);
     this.menu.hide();
+    this.music.show();
   }
 }
