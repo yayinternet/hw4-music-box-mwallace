@@ -56,5 +56,9 @@ class MenuScreen {
   getSongObject(songName) {
     return this.songs[songName];
   }
-
+  
+  hide() {
+    const menu = document.querySelector('#menu');
+    menu.style.display = 'none';
+  }
 }

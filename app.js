@@ -24,5 +24,6 @@ class App {
     console.log(song);
     const textInput = document.querySelector('#query-input');
     console.log(textInput.value);
+    this.menu.hide();
   }
 }
