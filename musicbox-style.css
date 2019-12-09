@@ -22,3 +22,9 @@ img, #controlsButton{
     justify-content: center;
     align-items: center; 
 }
+
+div, #gif {  
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}

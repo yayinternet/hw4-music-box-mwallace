@@ -12,6 +12,9 @@ class MusicScreen {
     this.container = document.createElement('article');
     this.player = document.createElement('section');
     this.player.id = 'player';
+    this.gif = document.createElement('div');
+    this.gif.id = 'gif';
+    this.player.appendChild(this.gif);
     this.controls = document.createElement('footer');
     this.controls.id = 'controls';
     this.controlsButton = document.createElement('img');
