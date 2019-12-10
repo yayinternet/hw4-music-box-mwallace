@@ -9,12 +9,13 @@
 // See HW4 writeup for more hints and details.
 class MusicScreen {
   constructor() {
+    // Members
+    this.song = null;
+    // DOM Nodes
     this.container = document.createElement('article');
     this.player = document.createElement('section');
     this.player.id = 'player';
-    this.gif = document.createElement('div');
-    this.gif.id = 'gif';
-    this.player.appendChild(this.gif);
+    this.gif = new GifDisplay(this.player);
     this.controls = document.createElement('footer');
     this.controls.id = 'controls';
     this.controlsButton = document.createElement('img');
@@ -34,5 +35,14 @@ class MusicScreen {
 
   hide() {
     this.container.style.display = 'none';
+  }
+
+  setSong(song) {
+    this.song = song;
+  }
+
+  setTheme(theme) {
+    this.gif.setTheme(theme);
+    this.gif.getImages();
   }
 }

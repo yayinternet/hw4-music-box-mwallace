@@ -22,10 +22,10 @@ class App {
     event.preventDefault();
     const songInput = document.querySelector('#song-selector');
     const song = this.menu.getSongObject(songInput.value);
-    console.log(song);
     const textInput = document.querySelector('#query-input');
-    console.log(textInput.value);
     this.menu.hide();
+    this.music.setSong(songInput.value);
+    this.music.setTheme(textInput.value);
     this.music.show();
   }
 }
