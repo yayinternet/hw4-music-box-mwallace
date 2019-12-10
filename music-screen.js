@@ -11,7 +11,7 @@ class MusicScreen {
   constructor() {
     // Members
     this.song = null;
-    this.audio = new AudioPlayer();
+    this.audioPlayer = new AudioPlayer();
     // DOM Nodes
     this.container = document.createElement('article');
     this.player = document.createElement('section');
@@ -34,6 +34,14 @@ class MusicScreen {
     this.setSong(song);
     this.setTheme(theme);
     this.show();
+    this.audioPlayer.setSong(song.songUrl);
+    console.log(song);
+    this.audioPlayer.setKickCallback(this.onKick);
+    this.audioPlayer.play();
+  }
+
+  onKick() {
+    console.log('kick!');
   }
 
   show() {
