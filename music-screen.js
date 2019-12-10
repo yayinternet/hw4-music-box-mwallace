@@ -37,7 +37,7 @@ class MusicScreen {
     this.audioPlayer.setSong(song.songUrl);
     console.log(song);
     this.audioPlayer.setKickCallback(this.onKick);
-    this.playbackControl(this.button.isPlaying);
+    this.playbackControl(this.button.isPlaying());
   }
 
   onKick() {
