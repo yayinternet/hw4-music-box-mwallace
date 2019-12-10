@@ -32,7 +32,7 @@ class GifDisplay {
         if (response.ok) {
           return response.json();
         } else {
-         // throw new Error('Something went wrong');
+          throw new Error('Something went wrong');
         }
       })
       .then(this.onResolved)
