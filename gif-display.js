@@ -28,26 +28,36 @@ class GifDisplay {
     const api_key = '&api_key=';
     const query = encodeURIComponent(theme);
     fetch(url + query + api_key + limit + rating)
-      .then(this.onSuccess, this.onFailure)
-      .then(this.onResolved);
-  }
-
-  onSuccess(response) {
-    return response.json();
-  }
-
-  onFailure(error) {
-    console.log(error);
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+         // throw new Error('Something went wrong');
+        }
+      })
+      .then(this.onResolved)
+      .catch((error) => {
+        console.log(error)
+      });
   }
 
   onResolved(resource) {
+    if (resource === undefined)
+      return;
     this.images = resource['data'];
-    this.setImage(this.images[0]);
+    this.setImage(this.randomImage());
     console.log(this.images);
   }
 
   setImage(obj) {
     const src = 'url(' + obj.images.downsized.url + ')';
     this.gif.style.backgroundImage = src;
+  }
+
+  randomImage() {
+    if (this.images === undefined)
+      return;
+    const index = Math.floor(Math.random() * this.images.length);
+    return this.images[index];
   }
 }
