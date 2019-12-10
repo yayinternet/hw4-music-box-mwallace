@@ -8,13 +8,13 @@ class PlayButton {
     this.togglePlaying = this.togglePlaying.bind(this);
     // Members
     this.container = container;
-    this.playing = true;
+    this.playing = false;
     // Callbacks
     this.playbackControl = playbackControl;
     // DOM Nodes
     this.controlsButton = document.createElement('img');
     this.controlsButton.id = 'controlsButton';
-    this.controlsButton.src = 'images/pause.png';
+    this.controlsButton.src = 'images/play.png';
     this.container.appendChild(this.controlsButton);
     // Event Listeners
     this.controlsButton.addEventListener('click', this.togglePlaying);
