@@ -33,8 +33,17 @@ class MenuScreen {
 
   getPlaylist(playlist) {
     fetch(playlist)
-      .then(this.onSuccess, this.onFailure)
-      .then(this.onResolved);
+      .then((response) => {
+          if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Something went wrong');
+        }
+      })
+      .then(this.onResolved)
+      .catch((error) => {
+        console.log(error)
+      });
   }
 
   populateMenu(songs) {
@@ -48,6 +57,8 @@ class MenuScreen {
   }
 
   prepopulateTheme() {
+    if (this.themes === undefined)
+      return;
     const index = Math.floor(Math.random() * this.themes.length);
     const themeInput = document.querySelector('#query-input');
     themeInput.defaultValue = this.themes[index];
