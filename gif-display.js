@@ -15,6 +15,11 @@ class GifDisplay {
     container.appendChild(this.gif);
 
   }
+
+  getImagesFromTheme(theme) {
+    this.setTheme(theme);
+    this.getImages(theme);
+  }
   
   setTheme(theme) {
     this.theme = theme;

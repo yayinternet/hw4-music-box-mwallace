@@ -42,7 +42,6 @@ class MusicScreen {
   }
 
   setTheme(theme) {
-    this.gif.setTheme(theme);
-    this.gif.getImages();
+    this.gif.getImagesFromTheme(theme);
   }
 }
