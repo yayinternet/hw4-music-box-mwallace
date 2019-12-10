@@ -11,6 +11,7 @@ class MusicScreen {
   constructor() {
     // Members
     this.song = null;
+    this.audio = new AudioPlayer();
     // DOM Nodes
     this.container = document.createElement('article');
     this.player = document.createElement('section');
@@ -27,6 +28,12 @@ class MusicScreen {
     this.container.style.display = 'none';
     const body = document.querySelector('body');
     body.appendChild(this.container);
+  }
+
+  init(song, theme) {
+    this.setSong(song);
+    this.setTheme(theme);
+    this.show();
   }
 
   show() {

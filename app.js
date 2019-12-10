@@ -24,8 +24,6 @@ class App {
     const song = this.menu.getSongObject(songInput.value);
     const textInput = document.querySelector('#query-input');
     this.menu.hide();
-    this.music.setSong(songInput.value);
-    this.music.setTheme(textInput.value);
-    this.music.show();
+    this.music.init(songInput.value, textInput.value);
   }
 }
