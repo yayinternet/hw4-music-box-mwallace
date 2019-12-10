@@ -24,6 +24,6 @@ class App {
     const song = this.menu.getSongObject(songInput.value);
     const textInput = document.querySelector('#query-input');
     this.menu.hide();
-    this.music.init(songInput.value, textInput.value);
+    this.music.init(song, textInput.value);
   }
 }
