@@ -3,8 +3,35 @@
 //
 // See HW4 writeup for more hints and details.
 class PlayButton {
-  constructor() {
-    // TODO(you): Implement the constructor and add fields as necessary.
+  constructor(container, playbackControl) {
+    // Binding
+    this.togglePlaying = this.togglePlaying.bind(this);
+    // Members
+    this.container = container;
+    this.playing = true;
+    // Callbacks
+    this.playbackControl = playbackControl;
+    // DOM Nodes
+    this.controlsButton = document.createElement('img');
+    this.controlsButton.id = 'controlsButton';
+    this.controlsButton.src = 'images/pause.png';
+    this.container.appendChild(this.controlsButton);
+    // Event Listeners
+    this.controlsButton.addEventListener('click', this.togglePlaying);
+    // Synchronize button's state with audio player's state
+    this.playbackControl(this.playing);
   }
-  // TODO(you): Add methods as necessary.
+  
+  togglePlaying(event) {
+    event.stopPropagation();
+    if (this.playing) {
+      this.playing = false;
+      this.controlsButton.src = 'images/play.png';
+    } else {
+      this.playing = true;
+      this.controlsButton.src = 'images/pause.png';
+    }
+    this.playbackControl(this.playing);
+  }
+
 }

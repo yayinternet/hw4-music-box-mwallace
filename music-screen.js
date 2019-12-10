@@ -9,6 +9,8 @@
 // See HW4 writeup for more hints and details.
 class MusicScreen {
   constructor() {
+    // Binding
+    this.playbackControl = this.playbackControl.bind(this);
     // Members
     this.song = null;
     this.audioPlayer = new AudioPlayer();
@@ -19,10 +21,7 @@ class MusicScreen {
     this.gif = new GifDisplay(this.player);
     this.controls = document.createElement('footer');
     this.controls.id = 'controls';
-    this.controlsButton = document.createElement('img');
-    this.controlsButton.id = 'controlsButton';
-    this.controlsButton.src = 'images/play.png';
-    this.controls.appendChild(this.controlsButton);
+    this.button = new PlayButton(this.controls, this.playbackControl);
     this.container.appendChild(this.player);
     this.container.appendChild(this.controls);
     this.container.style.display = 'none';
@@ -58,5 +57,13 @@ class MusicScreen {
 
   setTheme(theme) {
     this.gif.getImagesFromTheme(theme);
+  }
+
+  playbackControl(play) {
+    if (play) {
+      this.audioPlayer.play();
+    } else {
+      this.audioPlayer.pause();
+    }
   }
 }
