@@ -11,6 +11,7 @@ class MusicScreen {
   constructor() {
     // Binding
     this.playbackControl = this.playbackControl.bind(this);
+    this.onKick = this.onKick.bind(this);
     // Members
     this.song = null;
     this.audioPlayer = new AudioPlayer();
@@ -36,11 +37,12 @@ class MusicScreen {
     this.audioPlayer.setSong(song.songUrl);
     console.log(song);
     this.audioPlayer.setKickCallback(this.onKick);
-    this.audioPlayer.play();
+    this.playbackControl(this.button.isPlaying);
   }
 
   onKick() {
     console.log('kick!');
+    this.gif.getImagesFromTheme();
   }
 
   show() {

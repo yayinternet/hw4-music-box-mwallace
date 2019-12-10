@@ -34,4 +34,8 @@ class PlayButton {
     this.playbackControl(this.playing);
   }
 
+  isPlaying() {
+    return this.playing;
+  }
+
 }

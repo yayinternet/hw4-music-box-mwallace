@@ -51,7 +51,6 @@ class GifDisplay {
       return;
     this.images = resource['data'];
     this.setImage(this.randomImage());
-    console.log(this.images);
   }
 
   setImage(obj) {
