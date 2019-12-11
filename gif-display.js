@@ -64,4 +64,8 @@ class GifDisplay {
     const index = Math.floor(Math.random() * this.images.length);
     return this.images[index];
   }
+
+  setRandomImage() {
+    this.gif.style.backgroundImage = this.setImage(this.randomImage());
+  }
 }

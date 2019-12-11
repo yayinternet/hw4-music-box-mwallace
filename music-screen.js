@@ -43,7 +43,7 @@ class MusicScreen {
 
   onKick() {
     console.log('kick!');
-    this.gif.getImagesFromTheme();
+    this.gif.setRandomImage();
   }
 
   show() {
