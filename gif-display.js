@@ -9,6 +9,8 @@ class GifDisplay {
     // Members
     this.theme = null;
     this.images = [];
+    this.preloaded = [];
+    this.preloadIndex = 0;
     // DOM Nodes
     this.foreground = document.createElement('div');
     this.foreground.id = 'gif';
@@ -18,7 +20,6 @@ class GifDisplay {
     this.background.id = 'gif';
     this.background.style.zIndex = 0;
     container.appendChild(this.background);
-
   }
 
   getImagesFromTheme(theme) {
@@ -70,8 +71,21 @@ class GifDisplay {
     if (resource === undefined)
       return;
     this.images = resource['data'];
-    this.setRandomImage(this.foreground);
-    this.setRandomImage(this.background);
+    this.preload();
+    this.setRandomImageFromObject(this.foreground);
+    this.setRandomImageFromObject(this.background);
+  }
+
+  preload() {
+    for (let i = 0; i < this.images.length; ++i) {
+      const img = new Image();
+      img.src = this.images[i].images.downsized.url;
+      img.addEventListener('load', (event) => {
+        console.log('Preloaded: ' + this.preloadIndex);
+        this.preloaded[this.preloadIndex] = img;
+        ++this.preloadIndex;
+      });
+    }
   }
 
   setImage(element, obj) {
@@ -79,7 +93,7 @@ class GifDisplay {
     element.style.backgroundImage = src;
   }
 
-  randomImage() {
+  randomImageObject() {
     if (this.images === undefined)
       return;
     const tail = this.images.length - 1;
@@ -92,7 +106,25 @@ class GifDisplay {
     return tmp;
   }
 
+  randomPreloadedImage() {
+    if (this.preloadIndex <= 0)
+      return;
+    const tail = this.preloadIndex - 1;
+    const index = Math.floor(Math.random() * tail);
+    const tmp = this.preloaded[index];
+    this.preloaded[index] = this.preloaded[tail];
+    this.preloaded[tail] = tmp;
+    return tmp;
+  }
+
+  setRandomImageFromObject(element) {
+    this.setImage(element, this.randomImageObject());
+  }
+
   setRandomImage(element) {
-    this.setImage(element, this.randomImage());
+    const img = this.randomPreloadedImage();
+    if (img === undefined)
+      return;
+    element.style.backgroundImage = 'url(' + img.src + ')';
   }
 }
