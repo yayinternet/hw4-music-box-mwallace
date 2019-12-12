@@ -10,9 +10,14 @@ class GifDisplay {
     this.theme = null;
     this.images = [];
     // DOM Nodes
-    this.gif = document.createElement('div');
-    this.gif.id = 'gif';
-    container.appendChild(this.gif);
+    this.foreground = document.createElement('div');
+    this.foreground.id = 'gif';
+    this.foreground.style.zIndex = 1;
+    container.appendChild(this.foreground);
+    this.background = document.createElement('div');
+    this.background.id = 'gif';
+    this.background.style.zIndex = 0;
+    container.appendChild(this.background);
 
   }
 
@@ -23,6 +28,21 @@ class GifDisplay {
   
   setTheme(theme) {
     this.theme = theme;
+  }
+
+  swapBuffers() {
+    // Check to see which buffer is in the foreground presently
+    if (this.foreground.style.zIndex === '1') {
+      // Swap the foreground with back buffer
+      this.background.style.zIndex = 1;
+      this.foreground.style.zIndex = 0;
+      // Fetch a new image for the new back buffer
+      this.setRandomImage(this.foreground);
+    } else {
+      this.background.style.zIndex = 0;
+      this.foreground.style.zIndex = 1;
+      this.setRandomImage(this.background);
+    }
   }
 
   getImages(theme = this.theme) {
@@ -50,22 +70,29 @@ class GifDisplay {
     if (resource === undefined)
       return;
     this.images = resource['data'];
-    this.setImage(this.randomImage());
+    this.setRandomImage(this.foreground);
+    this.setRandomImage(this.background);
   }
 
-  setImage(obj) {
+  setImage(element, obj) {
     const src = 'url(' + obj.images.downsized.url + ')';
-    this.gif.style.backgroundImage = src;
+    element.style.backgroundImage = src;
   }
 
   randomImage() {
     if (this.images === undefined)
       return;
-    const index = Math.floor(Math.random() * this.images.length);
-    return this.images[index];
+    const tail = this.images.length - 1;
+    const index = Math.floor(Math.random() * tail);
+    // Swap pick with the last index so that we don't pick two of the same
+    // images in a row
+    const tmp = this.images[index];
+    this.images[index] = this.images[tail];
+    this.images[tail] = tmp;
+    return tmp;
   }
 
-  setRandomImage() {
-    this.gif.style.backgroundImage = this.setImage(this.randomImage());
+  setRandomImage(element) {
+    this.setImage(element, this.randomImage());
   }
 }

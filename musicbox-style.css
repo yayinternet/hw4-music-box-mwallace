@@ -15,6 +15,7 @@ footer, #controls{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 3;
 }
 
 img, #controlsButton{
@@ -27,5 +28,7 @@ div, #gif {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    position: absolute;
     height: 100%;
+    width: 100%;
 }
