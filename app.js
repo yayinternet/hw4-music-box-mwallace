@@ -6,9 +6,10 @@ class App {
   constructor() {
     // Bindings
     this.onSubmit = this.onSubmit.bind(this);
+    this.gifDisplayReady = this.gifDisplayReady.bind(this);
     // Members
     this.menu = new MenuScreen();
-    this.music = new MusicScreen();
+    this.music = new MusicScreen(this.gifDisplayReady);
     // Event Listeners
     const form = document.querySelector('form');
     form.addEventListener('submit', this.onSubmit);
@@ -23,7 +24,11 @@ class App {
     const songInput = document.querySelector('#song-selector');
     const song = this.menu.getSongObject(songInput.value);
     const textInput = document.querySelector('#query-input');
-    this.menu.hide();
     this.music.init(song, textInput.value);
+  }
+
+  gifDisplayReady() {
+    this.menu.hide();
+    this.music.start();
   }
 }

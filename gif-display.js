@@ -3,9 +3,11 @@
 // 
 // See HW4 writeup for more hints and details.
 class GifDisplay {
-  constructor(container) {
+  constructor(container, gifDisplayReadyCallback) {
     // Bindings
     this.onResolved = this.onResolved.bind(this);
+    // Callbacks
+    this.gifDisplayReadyCallback = gifDisplayReadyCallback;
     // Members
     this.theme = null;
     this.images = [];
@@ -72,8 +74,6 @@ class GifDisplay {
       return;
     this.images = resource['data'];
     this.preload();
-    this.setRandomImageFromObject(this.foreground);
-    this.setRandomImageFromObject(this.background);
   }
 
   preload() {
@@ -81,11 +81,19 @@ class GifDisplay {
       const img = new Image();
       img.src = this.images[i].images.downsized.url;
       img.addEventListener('load', (event) => {
-        console.log('Preloaded: ' + this.preloadIndex);
+        if (this.preloadIndex === 1) {
+          this.loadInitialImages();
+        }
         this.preloaded[this.preloadIndex] = img;
         ++this.preloadIndex;
       });
     }
+  }
+
+  loadInitialImages() {
+    this.foreground.backgroundImage = this.preloaded[0];
+    this.background.backgroundImage = this.preloaded[1];
+    this.gifDisplayReadyCallback();
   }
 
   setImage(element, obj) {
