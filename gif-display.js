@@ -52,7 +52,7 @@ class GifDisplay {
   getImages(theme = this.theme) {
     const url = 'https://api.giphy.com/v1/gifs/search?q=';
     const limit = '&limit=25';
-    const rating = '&rating=g';
+    const rating = '&rating=r';
     // Hello github!
     const api_key = '&api_key=';
     const query = encodeURIComponent(theme);
@@ -73,10 +73,12 @@ class GifDisplay {
   onResolved(resource) {
     if (resource === undefined)
       return;
-    if (resource.data.length < 2)
-      this.noImagesCallback();
-    this.images = resource['data'];
-    this.preload();
+    if (resource.data.length >= 2) {
+      this.noImagesCallback(false);
+      this.images = resource['data'];
+      this.preload();
+    } else
+      this.noImagesCallback(true);
   }
 
   preload() {

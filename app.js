@@ -29,12 +29,21 @@ class App {
   }
 
   gifDisplayReady() {
-    this.menu.hide();
+    const loadScreen = document.querySelector('#loading');
+    loadScreen.classList.add('inactive');
     this.music.start();
   }
 
-  noImagesCallback() {
-    const error = document.querySelector('#error');
-    error.classList.remove('inactive'); 
+  // Parameter set to true if not enough images were returned by giphy
+  noImagesCallback(errorFlag) {
+    if (errorFlag) {
+      const error = document.querySelector('#error');
+      error.classList.remove('inactive');
+    } else {
+      this.menu.hide();
+      const loadScreen = document.querySelector('#loading');
+      loadScreen.classList.remove('inactive');
+    }
+ 
   }
 }
