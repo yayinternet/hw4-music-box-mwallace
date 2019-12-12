@@ -8,7 +8,7 @@
 //
 // See HW4 writeup for more hints and details.
 class MusicScreen {
-  constructor(gifDisplayReadyCallback) {
+  constructor(gifDisplayReadyCallback, noImagesCallback) {
     // Binding
     this.playbackControl = this.playbackControl.bind(this);
     this.onKick = this.onKick.bind(this);
@@ -19,7 +19,7 @@ class MusicScreen {
     this.container = document.createElement('article');
     this.player = document.createElement('section');
     this.player.id = 'player';
-    this.gif = new GifDisplay(this.player, gifDisplayReadyCallback);
+    this.gif = new GifDisplay(this.player, gifDisplayReadyCallback, noImagesCallback);
     this.controls = document.createElement('footer');
     this.controls.id = 'controls';
     this.button = new PlayButton(this.controls, this.playbackControl);

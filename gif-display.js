@@ -3,11 +3,12 @@
 // 
 // See HW4 writeup for more hints and details.
 class GifDisplay {
-  constructor(container, gifDisplayReadyCallback) {
+  constructor(container, gifDisplayReadyCallback, noImagesCallback) {
     // Bindings
     this.onResolved = this.onResolved.bind(this);
     // Callbacks
     this.gifDisplayReadyCallback = gifDisplayReadyCallback;
+    this.noImagesCallback = noImagesCallback;
     // Members
     this.theme = null;
     this.images = [];
@@ -72,6 +73,8 @@ class GifDisplay {
   onResolved(resource) {
     if (resource === undefined)
       return;
+    if (resource.data.length < 2)
+      this.noImagesCallback();
     this.images = resource['data'];
     this.preload();
   }
