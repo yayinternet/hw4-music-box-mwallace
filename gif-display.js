@@ -1,3 +1,4 @@
+// ### REVIEW
 // This class will represent the gif display area. It keeps track of which gif
 // is being shown and can select a new random gif to be shown.
 // 
@@ -49,6 +50,7 @@ class GifDisplay {
     }
   }
 
+  // Requests a series of image links from giphy based on user-supplied theme
   getImages(theme = this.theme) {
     const url = 'https://api.giphy.com/v1/gifs/search?q=';
     const limit = '&limit=25';
@@ -81,6 +83,8 @@ class GifDisplay {
       this.noImagesCallback(true);
   }
 
+  // Load all images into <img> tags based on supplied links from giphy.
+  // in order to improve UIX (particularly on slower connections)
   preload() {
     for (let i = 0; i < this.images.length; ++i) {
       const img = new Image();
@@ -95,6 +99,8 @@ class GifDisplay {
     }
   }
 
+  // Load the front buffer and back buffer images with the first two
+  // fully-downloaded images, so we can start music playback
   loadInitialImages() {
     this.foreground.backgroundImage = this.preloaded[0];
     this.background.backgroundImage = this.preloaded[1];
@@ -106,6 +112,7 @@ class GifDisplay {
     element.style.backgroundImage = src;
   }
 
+  // ###TODO: Remove this dead code
   randomImageObject() {
     if (this.images === undefined)
       return;
@@ -119,6 +126,7 @@ class GifDisplay {
     return tmp;
   }
 
+  // Selects a random image from fully-downloaded images.
   randomPreloadedImage() {
     if (this.preloadIndex <= 0)
       return;
@@ -130,10 +138,12 @@ class GifDisplay {
     return tmp;
   }
 
+  // ###TODO: Remove this dead code
   setRandomImageFromObject(element) {
     this.setImage(element, this.randomImageObject());
   }
 
+  // Sets background to some randomly selected, fully-downloaded image
   setRandomImage(element) {
     const img = this.randomPreloadedImage();
     if (img === undefined)
