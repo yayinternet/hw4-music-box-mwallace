@@ -1,3 +1,4 @@
+// ### REVIEW
 // This class will represent the menu screen that you see when you first load
 // the music visualizer.
 //

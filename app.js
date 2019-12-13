@@ -1,3 +1,4 @@
+// ### REVIEW
 // This class will represent the music visualizer as a whole, similar to the
 // role that the `App` class played in HW3.
 //

@@ -1,3 +1,4 @@
+// ### REVIEW
 // This class will represent the music visualizer screen, i.e. the screen that
 // you see after you select a song.
 //
@@ -30,6 +31,8 @@ class MusicScreen {
     body.appendChild(this.container);
   }
 
+  // AudioPlayer needs to be instantiated here in order to work in Chrome
+  // (this function is called AFTER user interaction, allowing media playback)
   init(song, theme) {
     this.audioPlayer = new AudioPlayer();
     this.setSong(song);
